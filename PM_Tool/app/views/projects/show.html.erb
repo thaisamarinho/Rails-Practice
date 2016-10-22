@@ -1,0 +1,90 @@
+<h1><%= @project.title %></h1>
+
+<!-- <%#= project_discussions_path(@project)%> -->
+
+<p><%= @project.description %></p>
+<p><%= (@project.due_date.to_s)[0..10] %></p>
+
+<%= link_to "Edit", edit_project_path(@project)%>
+<%= link_to "Delete", project_path(@project),
+                      method: :delete,
+                      data: {confirm: 'Are you sure you want to delete this project?'}%>
+<br>
+<br>
+
+<!-- ---------------------------------------------------------------- -->
+
+<%=  form_for @task, url: project_tasks_path(@project) do |f| %>
+    <%= @task.errors.full_messages.join(', ')%>
+    <%= form_for [@project, @task] do |f| %>
+      <div>
+        <%= f.label :title%>
+        <%= f.text_field :title%>
+      </div>
+      <br>
+      <div>
+        <%= f.label :body%>
+        <%= f.text_area :body%>
+      </div>
+      <div>
+        <%= f.label :due_date%>
+        <%= f.date_field :due_date%>
+      </div>
+      <br>
+      <div>
+      <%= f.submit%>
+      </div>
+    <% end %>
+  <% end %>
+  <br>
+
+
+<!-- ---------------------------------------------------------------- -->
+
+<%=  form_for @discussion, url: project_discussions_path(@project) do |f| %>
+    <%= @discussion.errors.full_messages.join(', ')%>
+    <%= form_for [@project, @discussion] do |f| %>
+      <div>
+        <%= f.label :title%>
+        <%= f.text_field :title%>
+      </div>
+      <br>
+      <div>
+        <%= f.label :body%>
+        <%= f.text_area :body%>
+      </div>
+      <br>
+      <div>
+      <%= f.submit%>
+      </div>
+    <% end %>
+  <% end %>
+  <br>
+
+<!-- ---------------------------------------------------------------- -->
+
+<% if @project.tasks.size != 0 %>
+<h2>Tasks</h2>
+<%end%>
+<% @project.tasks.each do |task| %>
+<h4><%= task.title %></h4>
+<p><%= task.body %></p>
+<p><%= task.due_date %></p>
+<hr>
+<%= link_to "Edit", edit_project_task_path(@project, task)%>
+<%= link_to 'Delete', project_task_path(@project, task), method: :delete, data: { confirm: 'Are you sure?'} %>
+<% end %>
+
+<!-- ---------------------------------------------------------------- -->
+
+<% if @project.discussions.size != 0 %>
+<h2>Discussions</h2>
+<%end%>
+<% @project.discussions.each do |discussion| %>
+  <h4><%= discussion.title %></h4>
+  <p><%= discussion.body %></p>
+  <hr>
+  <%= link_to "Show", project_discussion_path(@project, discussion)%>
+  <%= link_to "Edit", edit_project_discussion_path(@project, discussion)%>
+  <%= link_to 'Delete', project_discussion_path(@project, discussion), method: :delete, data: { confirm: 'Are you sure?'} %>
+<% end %>

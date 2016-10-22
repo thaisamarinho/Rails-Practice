@@ -5,5 +5,17 @@ Rails.application.routes.draw do
 
   get "/about" => "home#about"
 
+  resources :projects do
+    get :search, on: :collection
+    get :flag, on: :member
+    post :approve
+    resources :discussions  do
+      get :search, on: :collection
+      get :flag, on: :member
+      post :approve
+      resources :comments
+    end
+    resources :tasks
+  end
 
 end

@@ -1,0 +1,6 @@
+<h1>All Projects</h1>
+
+<%@projects.each do |p|%>
+  <h2><%=link_to p.title, project_path(p) %></h2>
+  <hr>
+<%end%>

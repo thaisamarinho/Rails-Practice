@@ -1,0 +1,19 @@
+<%= @project.errors.full_messages.join(", ")%>
+
+<%= form_for  @project do |p| %>
+  <div>
+    <%=p.label :title %>
+    <%=p.text_field :title %>
+  </div>
+  <div>
+    <%=p.label :description %>
+    <%=p.text_area :description %>
+  </div>
+  <div>
+    <%=p.label :due_date %>
+    <%=p.date_field :due_date %>
+  </div>
+  <br>
+  <br>
+  <%= p.submit btn_label %>
+<% end %>

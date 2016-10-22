@@ -1,0 +1,17 @@
+
+    <%= @discussion.errors.full_messages.join(', ')%>
+    <%= form_for [@project, @discussion] do |f| %>
+      <div>
+        <%= f.label :title%>
+        <%= f.text_field :title%>
+      </div>
+      <br>
+      <div>
+        <%= f.label :body%>
+        <%= f.text_area :body%>
+      </div>
+      <br>
+      <div>
+      <%= f.submit%>
+      </div>
+    <% end %>
