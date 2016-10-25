@@ -1,11 +1,12 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user, except: [:index, :show]
   def new
     @post = Post.new
   end
 
   def create
-    post_params = params.require(:post).permit([:title, :body])
     @post = Post.new post_params
+    @post.user = current_user
      if @post.save
        redirect_to post_path(@post)
      else
@@ -15,6 +16,10 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find params[:id]
+    @comment = Comment.new
+    if @post.category_id != nil
+      @category = Category.find @post.category_id
+    end
   end
 
   def index
@@ -26,9 +31,7 @@ class PostsController < ApplicationController
   end
 
   def update
-
     @post = Post.find params[:id]
-    post_params = params.require(:post).permit(:title, :body)
     if @post.update(post_params)
       redirect_to post_path(@post)
     else
@@ -40,5 +43,9 @@ class PostsController < ApplicationController
     @post = Post.find params[:id]
     @post.destroy
     redirect_to posts_path
+  end
+
+  def post_params
+    post_params = params.require(:post).permit([:title, :body, :category_id])
   end
 end

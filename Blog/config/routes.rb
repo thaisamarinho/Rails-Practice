@@ -5,7 +5,15 @@ Rails.application.routes.draw do
 
   get "/about" => "home#about"
 
-  resources :posts
+  resources :users, only: [:new, :create, :edit, :update]
+  resources :passwords, only: [:edit, :update] 
+  resources :sessions, only: [:new, :create] do
+    delete :destroy, on: :collection
+  end
+
+  resources :posts do
+    resources :comments
+  end
 
 
 end

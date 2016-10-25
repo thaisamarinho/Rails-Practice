@@ -33,4 +33,15 @@ class TasksController < ApplicationController
     task.destroy
     redirect_to project_path(project)
   end
+
+  def status
+    project = Project.find params[:project_id]
+    task = Task.find params[:task_id]
+    if task.status == false
+      task.update_attribute(:status, "Done")
+    else
+      task.update_attribute(:status, false)
+    end
+    redirect_to project_path(project)
+  end
 end

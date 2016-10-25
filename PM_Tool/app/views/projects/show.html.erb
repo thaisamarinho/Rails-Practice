@@ -71,6 +71,11 @@
 <p><%= task.body %></p>
 <p><%= task.due_date %></p>
 <hr>
+<% if task.status == false %>
+  <%= link_to "Not Done", project_task_status_path(@project, task), :method => :patch%>
+<%else%>
+  <%= link_to "Done", project_task_status_path(@project, task), :method => :patch%>
+<%end%>
 <%= link_to "Edit", edit_project_task_path(@project, task)%>
 <%= link_to 'Delete', project_task_path(@project, task), method: :delete, data: { confirm: 'Are you sure?'} %>
 <% end %>

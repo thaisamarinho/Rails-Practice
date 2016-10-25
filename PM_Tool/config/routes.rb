@@ -15,7 +15,9 @@ Rails.application.routes.draw do
       post :approve
       resources :comments
     end
-    resources :tasks
+    resources :tasks do
+        patch '/tasks/:id/status' => 'tasks#status', as: :status
+    end
   end
 
 end

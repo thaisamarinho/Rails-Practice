@@ -1,15 +1,19 @@
 class CommentsController < ApplicationController
+  before_action :authenticate_user, except: [:index, :show]
+
   def new
     @comment = comment.new
   end
 
   def create
-    comment_params = params.require(:comment).permit([:body])
-    @comment = comment.new comment_params
+    @post = Post.find params[:post_id]
+    @comment = Comment.new comment_params
+    @comment.post = @post
+    @comment.user = current_user
      if @comment.save
-       redirect_to comment_path(@comment)
+       redirect_to post_path(@post)
      else
-       render :new
+       render 'posts/show'
      end
   end
 
@@ -26,7 +30,6 @@ class CommentsController < ApplicationController
   end
 
   def update
-
     @comment = comment.find params[:id]
     comment_params = params.require(:comment).permit(:body)
     if @comment.update comment_params
@@ -37,10 +40,14 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment = comment.find params[:id]
-    @comment.destroy
-    redirect_to comments_path
+    post = Post.find params[:post_id]
+    comment = Comment.find params[:id]
+    comment.destroy
+    redirect_to post_path(post)
   end
-end
+
+  def comment_params
+    comment_params = params.require(:comment).permit([:body])
+  end
 
 end

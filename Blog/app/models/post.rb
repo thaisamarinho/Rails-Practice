@@ -3,7 +3,10 @@
 class Post < ApplicationRecord
   validates :title, presence: true, length: { minimum: 7 }
   validates :body, presence: true
+  belongs_to :category
+  belongs_to :user
 
+  has_many :comments, lambda {order(created_at: :desc)}, dependent: :destroy
 
 
   def body_snippet
