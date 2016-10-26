@@ -1,0 +1,21 @@
+
+<%= @question.errors.full_messages.join(", ")%>
+<!-- if the object you pass to the form is persisted (has an ID in the DB)  then rails will automatically make the form submit a patch request with URL in this question question_path(@question) (same as a show link with PATCH) @question variable is persisted in this case so it will have a title and a body so those will be pre-populated in their respective fields-->
+
+<%= form_for  @question do |f| %>
+
+<%# We use form_for when we're creating a form related to a Rails model. the first argument of the form_for must be an ActiveRecord object. if the first argument is a new instance of the ActiveRecord class, for instance,
+Question.new then the form will automatically send a post request to the standard create action url which is in this case: question_path%>
+
+  <div class="form-group">
+    <%# we can use f.label and f.text_field to generate a label/text input group in this case `title` must be an attribute for the variable you pass to form_for which is @question in this case. The label will have a `for` attribute that matches the id of the generated input field for the title. The title input field will have a name attribute that is model_type[field] In the example below the `name` attribute for the input field will be: question[title] The input field will be populated with a value if @quation has that attribute value set to something%>
+    <%=f.label :title %>
+    <%=f.text_field :title %>
+  </div>
+  <div class="form-group">
+    <%=f.label :body %>
+    <%=f.text_area :body %>
+  </div>
+  <%# this will automatically generate a submit button. The label for the button will depend on the `@question` variable. If @question is a new instance then the label of the button will be `Create #{model name capitalized}`. If you're not happy with the label, you can pass the label as a first arguement: f.submit 'Create'  %>
+  <%= f.submit btn_label %>
+<% end %>

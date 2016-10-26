@@ -1,0 +1,13 @@
+
+<h1>Edit Question</h1>
+
+
+
+<!-- This line will look for partial named conventionally '_form.html.erb'  within the same folder as this file which is: /app/views/questions/.-->
+<!-- Partials will have access to the same instance variable as a template they are rendered within. In this case the `_form` partial will have access to -->
+<!-- @question variable. If you want to pass a local varialbe, then you will have to do that explicitly in this case there will be a local variable named btn_label within the _form partial and it will have the value of "Update" -->
+
+
+<%= render 'form', {btn_label: 'Update'}  %>
+
+<!-- <%#= render '/question/form' %> -->

@@ -1,0 +1,19 @@
+<h1>Contact me</h1>
+ <!-- form_tag is a helper method that will generate a form html element with POST http request. The first argumentof the helper method must be the url you would like to submit the form to. -->
+<%= form_tag contact_submit_path do %>
+  <div class="form-group">
+    <%= label_tag :full_name %>
+    <%= text_field_tag :full_name %>
+  </div>
+  <div class="form-group">
+    <%= label_tag :email %>
+    <%= email_field_tag :email %>
+  </div>
+  <div class="form-group">
+    <%= label_tag :message %>
+    <%= text_area_tag(:message, content = nil, options = {}) %>
+  </div>
+  <div class="form-group">
+    <%= submit_tag "Contact Us!" %>
+  </div>
+<% end %>
