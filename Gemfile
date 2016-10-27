@@ -51,6 +51,9 @@ group :development do
   gem 'interactive_editor'
   gem 'awesome_print'
   gem 'hirb'
+
+  gem 'pry'
+  gem 'pry-rails'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
