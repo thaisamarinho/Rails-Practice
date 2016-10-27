@@ -53,5 +53,7 @@ Rails.application.routes.draw do
 
     # nesting the answers resources whithin the questions resources block will make it so that every 'answers' route is prefixed with: '/questions/:question_id'. We will need the `question_id` to create an answer associated with a question so we will stick with this way of defining the routes.
     resources :answers, only: [:create, :destroy]
+
+    resources :likes, only: [:create, :destroy]
   end
 end

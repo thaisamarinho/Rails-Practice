@@ -9,6 +9,9 @@ class Question < ApplicationRecord
   # you can also put ':nullify' which will update all the asssociated answers to have a question_id of null when the question is deleted
   has_many :answers, lambda { order(created_at: :desc)}, dependent: :destroy
 
+  has_many :likes, dependent: :destroy
+  has_many :likers, through: :likes, source: :user
+
   validates :title, presence: true, uniqueness: {case_sensitive: false, message: "Must be unique"}
   # with scope we validate that the combination of two fields is unique. In the
   # example below, we're validating that the combination of title/body is unique

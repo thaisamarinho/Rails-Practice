@@ -13,6 +13,17 @@
                         method: :delete,
                         data: {confirm: 'Are you sure you want to delete this question?'}%>
 <%end%>
+<% if user_signed_in?%>
+  <% like = @question.likes.find_by(user: current_user)%>
+
+  <% if like.present? && %>
+    <%= link_to "Unlike", like_path(like), method: :delete %>
+    <%else%>
+  <%= link_to "Like", question_likes_path(@question), method: :post %>
+  <%end%>
+
+<%end%>
+<%= pluralize(@question.likes.count, "Like") %>
 <br>
 <br>
 <%#=  form_for @answer, url: question_answers_path(@question) do |f| %>
