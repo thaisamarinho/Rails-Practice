@@ -24,6 +24,11 @@
 <%= pluralize(@question.likes.count, "Like") %>
 <br>
 <br>
+
+<section class="vote-widget">
+  <%= upvote_link(@question)%>
+  <%= downvote_link(@question)%>
+</section>
 <%#=  form_for @answer, url: question_answers_path(@question) do |f| %>
 <h2>Create Answer</h2>
 
