@@ -15,6 +15,9 @@ class Question < ApplicationRecord
   has_many :votes, dependent: :destroy
   has_many :voters, through: :votes, source: :user
 
+  has_many :taggings, dependent: :destroy
+  has_many :tags, through: :taggings
+
   validates :title, presence: true, uniqueness: {case_sensitive: false, message: "Must be unique"}
   # with scope we validate that the combination of two fields is unique. In the
   # example below, we're validating that the combination of title/body is unique
