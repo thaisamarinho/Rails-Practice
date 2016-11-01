@@ -10,6 +10,7 @@ class User < ApplicationRecord
  # it will generate `password_digest`. So you must have `password_digest`
  # column in your users table.
   has_secure_password
+
   has_many :answers, dependent: :nullify
   has_many :likes, dependent: :destroy
   has_many :liked_questions, through: :likes, source: :question

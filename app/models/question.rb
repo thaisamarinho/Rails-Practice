@@ -34,6 +34,9 @@ class Question < ApplicationRecord
     end
   end
 
+  def like_for(user)
+    likes.find_by(user: user)
+  end
 
    # scope :recent_ten, lambda { limit(10).order(created_at: :desc) }
 

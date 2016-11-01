@@ -28,7 +28,9 @@ Rails.application.routes.draw do
   # the url helpers (when we set it using `as`) is only concerned about the
  # URL and not the VERB. So even if we have two routes with the same url
  # and different verbs, the url helper should be the same. and they will automatically know which request to take, the form one or the get one.
- resources :users, only: [:new, :create]
+ resources :users, only: [:new, :create] do
+   resources :likes, only: [:index]
+ end
  resources :sessions, only: [:new, :create] do
    delete :destroy, on: :collection
  end
@@ -55,5 +57,7 @@ Rails.application.routes.draw do
     resources :answers, only: [:create, :destroy]
 
     resources :likes, only: [:create, :destroy]
+
+    resources :votes, only: [:create, :update, :destroy]
   end
 end

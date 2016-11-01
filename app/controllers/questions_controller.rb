@@ -34,6 +34,7 @@ class QuestionsController < ApplicationController
     # METHOD: GET
   def show
     @answer = Answer.new
+    @like = @question.like_for(current_user)
   end
 
   # this action is to show a listings of all the questions
