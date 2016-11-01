@@ -30,6 +30,10 @@
   <%= downvote_link(@question)%>
   <%= @question.vote_value %>
 </section>
+
+<section>
+  <%= @question.tags.map(&:name).join(", ") %>
+</section>
 <%#=  form_for @answer, url: question_answers_path(@question) do |f| %>
 <h2>Create Answer</h2>
 

@@ -39,6 +39,7 @@ end
 
 gem 'faker'
 gem 'cancancan'
+gem 'chosen-rails'
 
 
 group :development do

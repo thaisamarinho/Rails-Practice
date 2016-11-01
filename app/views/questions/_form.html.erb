@@ -16,6 +16,18 @@ Question.new then the form will automatically send a post request to the standar
     <%=f.label :body %>
     <%=f.text_area :body %>
   </div>
+  <div>
+    <%= f.collection_select(
+    :tag_ids, Tag.all, :id, :name, {},
+    { multiple: true, class: 'chosen-select'}
+    ) %>
+  </div>
+  <br>
+  <br>
   <%# this will automatically generate a submit button. The label for the button will depend on the `@question` variable. If @question is a new instance then the label of the button will be `Create #{model name capitalized}`. If you're not happy with the label, you can pass the label as a first arguement: f.submit 'Create'  %>
   <%= f.submit btn_label %>
 <% end %>
+
+<script>
+$('.chosen-select').chosen({width: '300px'});
+</script>
