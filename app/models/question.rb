@@ -43,6 +43,10 @@ class Question < ApplicationRecord
 
    # scope :recent_ten, lambda { limit(10).order(created_at: :desc) }
 
+   def vote_value
+     votes.up.count - votes.down.count
+   end
+
   private
 
   def no_monkey
@@ -58,5 +62,6 @@ class Question < ApplicationRecord
   def titleize_title
     self.title = title.titleize
   end
+
 
 end

@@ -1,5 +1,5 @@
 class VotesController < ApplicationController
-
+  before_action :authenticate_user
   def create
     vote = Vote.new vote_params
     vote.user = current_user
